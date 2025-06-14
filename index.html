@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="testpage">눌러 보세요</h1>
+
+        
+        
+        <p id="text" style="line-height:80px; position:relative; top:50%; margin:0pt; text-align:center;">공민권 바보</p>
+        
+        
+
+
+
+    <script>
+        function randomColor(){
+                let r = Math.floor(Math.random() * 256);
+                let g = Math.floor(Math.random() * 256);
+                let b = Math.floor(Math.random() * 256);
+                return `rgb(${r}, ${g}, ${b})`;
+        }
+        
+        text=document.querySelector("#text") 
+        text.style.left=`calc(50% - (${text.style.width} / 2))`
+        text.style.display="none"
+        
+        document.querySelector("h1").addEventListener("click",function(){
+            if (text.style.display == "none"){ 
+                text.style.display="block"
+                text.style.fontSize="25pt"
+                text.style.color=randomColor();
+                document.querySelector("h1").innerHTML="(눌러서 끄기)"
+
+
+                let direct=1
+                timerId=setInterval(function(){
+                    text.style.color=randomColor();
+                    
+                    if (Number(text.style.fontSize.slice(5,7))>55){
+                        direct=-1
+                    }else if(Number(text.style.fontSize.slice(5,7))<25){
+                        direct=1
+                    }
+                    if (direct>0){
+                        text.style.fontSize=`calc(${text.style.fontSize} + ${1}px)`;
+                    }else{
+                        text.style.fontSize=`calc(${text.style.fontSize} - ${1}px)`;
+                    }
+                    
+                    
+                },10);
+                
+            }else{
+                text.style.display="none"
+                clearInterval(timerId);
+                document.querySelector("h1").innerHTML="눌러 보세요"
+            } 
+        })
+               
+    </script>
+</body>
+</html>
